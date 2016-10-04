@@ -4,11 +4,11 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-    <link rel="icon" th:href="@{/favicon.png}" />
+    <link rel="icon" th:href="@{/favicon.png}"/>
 
-    <link rel="stylesheet" th:href="@{/vendor/materialize/css/materialize.css}" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-    <link rel="stylesheet" th:href="@{/app.css}" />
+    <link rel="stylesheet" th:href="@{/vendor/materialize/css/materialize.css}"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+    <link rel="stylesheet" th:href="@{/app.css}"/>
 
     <title>giflib | Categories</title>
 </head>
@@ -36,7 +36,8 @@
         <div class="col s12">
             <form action="#" method="get">
                 <div class="input-field">
-                    <input name="q" type="search" placeholder="Search all gifs..." required="required" autocomplete="off"/>
+                    <input name="q" type="search" placeholder="Search all gifs..." required="required"
+                           autocomplete="off"/>
                     <i class="material-icons">search</i>
                 </div>
             </form>
@@ -50,7 +51,7 @@
             collection of the model map. Each object in the loop
             should be named 'category'
         -->
-        <div class="col s12 l4">
+        <div class="col s12 l4" th:each="category : ${categories}">
             <div class="card">
                 <div class="card-content">
                     <div class="card-title">
@@ -63,7 +64,7 @@
                             coming from the 'name' field of the 'category' object
                             in the model map
                         -->
-                        <a>Category Name</a>
+                        <a th:href="@{'/category/'+${category.id}}" th:text="${category.name}">Category Name</a>
                     </div>
                 </div>
             </div>
