@@ -1,6 +1,6 @@
 package com.el12n.giflib.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * Created by alvarodelacruz on 3/10/16.
@@ -8,11 +8,11 @@ import java.util.Date;
 public class Gif {
 
     private String name;
-    private Date dateUploaded;
+    private LocalDate dateUploaded;
     private String username;
     private boolean favorite;
 
-    public Gif(String name, Date dateUploaded, String username, boolean favorite) {
+    public Gif(String name, LocalDate dateUploaded, String username, boolean favorite) {
         this.name = name;
         this.dateUploaded = dateUploaded;
         this.username = username;
@@ -27,11 +27,11 @@ public class Gif {
         this.name = name;
     }
 
-    public Date getDateUploaded() {
+    public LocalDate getDateUploaded() {
         return dateUploaded;
     }
 
-    public void setDateUploaded(Date dateUploaded) {
+    public void setDateUploaded(LocalDate dateUploaded) {
         this.dateUploaded = dateUploaded;
     }
 
