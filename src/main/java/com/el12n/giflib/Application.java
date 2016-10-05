@@ -5,14 +5,12 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 
 /**
- * Created by alvarodelacruz on 10/3/16.
+ * Created by Alvaro De la Cruz on 10/5/2016.
  */
 @EnableAutoConfiguration
 @ComponentScan
-public class AppConfig {
-
+public class Application {
     public static void main(String[] args) {
-        SpringApplication.run(AppConfig.class, args);
+        SpringApplication.run(Application.class, args);
     }
-
 }
