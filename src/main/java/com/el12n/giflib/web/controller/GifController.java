@@ -20,14 +20,14 @@ public class GifController {
     public String listGifs(ModelMap modelMap) {
         List<Gif> allGifs = new ArrayList<>();
         modelMap.put("gifs", allGifs);
-        return "home";
+        return "gif/index";
     }
 
     @RequestMapping("/gif/{name}")
     public String gifDetails(ModelMap modelMap, @PathVariable String name) {
         Gif gif = new Gif();
         modelMap.put("gif", gif);
-        return "gif-details";
+        return "gif/details";
     }
 
 }

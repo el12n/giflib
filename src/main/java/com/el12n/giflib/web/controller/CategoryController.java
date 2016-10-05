@@ -34,7 +34,7 @@ public class CategoryController {
         List<Category> categories = session.createQuery(criteria).getResultList();
 
         modelMap.put("categories", categories);
-        return "categories";
+        return "category/index";
     }
 
     @RequestMapping("/category/{id}")
@@ -45,7 +45,7 @@ public class CategoryController {
         List<Gif> gifs = new ArrayList<>();
         modelMap.put("gifs", gifs);
 
-        return "category";
+        return "category/details";
     }
 
 }
