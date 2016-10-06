@@ -97,4 +97,16 @@ public class CategoryController {
         redirectAttributes.addFlashAttribute("flash", new FlashMessage("Category successfully added!", FlashMessage.Status.SUCCESS));
         return "redirect:/categories";
     }
+
+    @RequestMapping(value = "/categories/{categoryId}/delete", method = RequestMethod.POST)
+    public String deleteCategory(@PathVariable Long categoryId, RedirectAttributes redirectAttributes) {
+        Category category = categoryService.findById(categoryId);
+        if (category.getGifs().size() > 0) {
+            redirectAttributes.addFlashAttribute("flash", new FlashMessage("Only empty categories can be deleted!", FlashMessage.Status.FAILURE));
+            return String.format("redirect:/categories/%s/edit", categoryId);
+        }
+        categoryService.delete(category);
+        redirectAttributes.addFlashAttribute("flash", new FlashMessage("Category successfully deleted!", FlashMessage.Status.SUCCESS));
+        return "redirect:/categories";
+    }
 }

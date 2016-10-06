@@ -1,6 +1,7 @@
 package com.el12n.giflib.dao;
 
 import com.el12n.giflib.model.Category;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,7 @@ public class CategoryDaoImpl implements CategoryDao {
     public Category findById(long id) {
         Session session = sessionFactory.openSession();
         Category category = session.get(Category.class, (int) id);
+        Hibernate.initialize(category.getGifs());
         session.close();
         return category;
     }
