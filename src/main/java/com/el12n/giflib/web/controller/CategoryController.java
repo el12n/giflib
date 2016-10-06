@@ -2,16 +2,14 @@ package com.el12n.giflib.web.controller;
 
 import com.el12n.giflib.model.Category;
 import com.el12n.giflib.model.Gif;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+
+import com.el12n.giflib.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,16 +20,11 @@ import java.util.List;
 public class CategoryController {
 
     @Autowired
-    private SessionFactory sessionFactory;
+    private CategoryService categoryService;
 
     @RequestMapping("/categories")
     public String getCategories(ModelMap modelMap) {
-        Session session = sessionFactory.openSession();
-
-        CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Category> criteria = builder.createQuery(Category.class);
-        criteria.from(Category.class);
-        List<Category> categories = session.createQuery(criteria).getResultList();
+        List<Category> categories = categoryService.findAll();
 
         modelMap.put("categories", categories);
         return "category/index";
