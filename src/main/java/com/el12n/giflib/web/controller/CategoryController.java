@@ -65,7 +65,7 @@ public class CategoryController {
             return "redirect:/categories/add";
         }
         categoryService.save(category);
-        redirectAttributes.addFlashAttribute("flash", new FlashMessage("Category successfully added!", FlashMessage.Status.SUCESS));
+        redirectAttributes.addFlashAttribute("flash", new FlashMessage("Category successfully added!", FlashMessage.Status.SUCCESS));
         return "redirect:/categories";
     }
 }
