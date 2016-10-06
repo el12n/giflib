@@ -5,6 +5,7 @@ import com.el12n.giflib.model.Gif;
 
 import com.el12n.giflib.service.CategoryService;
 import com.el12n.giflib.web.Color;
+import com.el12n.giflib.web.FlashMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -64,6 +65,7 @@ public class CategoryController {
             return "redirect:/categories/add";
         }
         categoryService.save(category);
+        redirectAttributes.addFlashAttribute("flash", new FlashMessage("Category successfully added!", FlashMessage.Status.SUCESS));
         return "redirect:/categories";
     }
 }
