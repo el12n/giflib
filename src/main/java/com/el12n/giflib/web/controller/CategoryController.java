@@ -54,7 +54,36 @@ public class CategoryController {
             model.addAttribute("category", new Category());
         }
         model.addAttribute("colors", Color.values());
+
+        model.addAttribute("heading", "New Category");
+        model.addAttribute("action", "/categories");
+        model.addAttribute("submit", "Add");
         return "category/form";
+    }
+
+    @RequestMapping("categories/{categoryId}/edit")
+    public String formEditCategory(@PathVariable Long categoryId, Model model) {
+        if (!model.containsAttribute("category")) {
+            model.addAttribute("category", categoryService.findById(categoryId));
+        }
+        model.addAttribute("colors", Color.values());
+
+        model.addAttribute("heading", "Edit Category");
+        model.addAttribute("action", String.format("/categories/%s", categoryId));
+        model.addAttribute("submit", "Update");
+        return "category/form";
+    }
+
+    @RequestMapping(value = "/categories/{categoryId}", method = RequestMethod.POST)
+    public String updateCategory(@Valid Category category, BindingResult result, RedirectAttributes redirectAttributes) {
+        if (result.hasErrors()) {
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.category", result);
+            redirectAttributes.addFlashAttribute("category", category);
+            return String.format("redirect:/categories/%s/edit", category.getId());
+        }
+        categoryService.save(category);
+        redirectAttributes.addFlashAttribute("flash", new FlashMessage("Category successfully updated!", FlashMessage.Status.SUCCESS));
+        return "redirect:/categories";
     }
 
     @RequestMapping(value = "/categories", method = RequestMethod.POST)
