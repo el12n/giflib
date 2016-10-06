@@ -9,7 +9,8 @@ public enum Color {
     PURPLE("Purple", "#7e59b3"),
     FUCHSIA("Fucshia", "#b35986"),
     ORANGE("Orange", "#b36859"),
-    GOLD("Gold", "#b38f59");
+    GOLD("Gold", "#b38f59"),
+    POMEGRANATE("Pomegranate", "#c0392b");
 
     private final String name;
     private final String hexCode;

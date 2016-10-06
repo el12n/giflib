@@ -16,10 +16,10 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @NotNull
-    @Size(min = 3, max = 12)
+    @Size(min = 3, max = 12, message = "{category.name.size}")
     private String name;
 
-    @NotNull
+    @NotNull(message = "{category.colorCode.nullability}")
     @Pattern(regexp = "#[0-9a-fA-F]{6}")
     private String colorCode;
 
