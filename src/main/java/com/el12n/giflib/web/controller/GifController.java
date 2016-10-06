@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+
 
 /**
  * Created by alvarodelacruz on 3/10/16.
@@ -75,6 +77,21 @@ public class GifController {
                 "flash",
                 new FlashMessage("Gif successfully uploaded!", FlashMessage.Status.SUCCESS));
         return String.format("redirect:/gifs/%s", gif.getId());
+    }
+
+    @RequestMapping(value = "/gifs/{gifId}/delete", method = RequestMethod.POST)
+    public String deleteGif(@PathVariable Long gifId, RedirectAttributes redirectAttributes) {
+        gifService.delete(gifService.findById(gifId));
+        redirectAttributes.addFlashAttribute("flash", new FlashMessage("Gif deleted successfully!", FlashMessage.Status.SUCCESS));
+        return "redirect:/";
+    }
+
+    @RequestMapping(value = "/gifs/{gifId}/favorite", method = RequestMethod.POST)
+    public String toggleFavorite(@PathVariable Long gifId, HttpServletRequest request) {
+        Gif gif = gifService.findById(gifId);
+        gifService.toggleFavorite(gif);
+
+        return String.format("redirect:%s", request.getHeader("referer"));
     }
 
 }
