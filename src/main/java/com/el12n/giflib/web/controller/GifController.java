@@ -28,7 +28,10 @@ public class GifController {
 
     @RequestMapping("/")
     public String listGifs(Model model) {
-        model.addAttribute("gifs", gifService.findAll());
+        if (!model.containsAttribute("query") ||
+                !model.containsAttribute("gifs")) {
+            model.addAttribute("gifs", gifService.findAll());
+        }
         return "gif/index";
     }
 
@@ -51,9 +54,10 @@ public class GifController {
     }
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
-    public String searchGif(@RequestParam String q, Model model) {
-        model.addAttribute("gifs", gifService.findByName(q));
-        return "gif/index";
+    public String searchGif(@RequestParam String q, RedirectAttributes redirectAttributes) {
+        redirectAttributes.addFlashAttribute("gifs", gifService.findByName(q));
+        redirectAttributes.addFlashAttribute("query", q);
+        return "redirect:/";
     }
 
     @RequestMapping("/upload")

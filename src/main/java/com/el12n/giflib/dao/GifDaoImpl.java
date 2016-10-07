@@ -41,7 +41,7 @@ public class GifDaoImpl implements GifDao {
         CriteriaQuery<Gif> criteria = builder.createQuery(Gif.class);
         Root<Gif> gifRoot = criteria.from(Gif.class);
         criteria.select(gifRoot);
-        criteria.where(builder.like(gifRoot.get("description"), "%" + name + "%"));
+        criteria.where(builder.like(builder.lower(gifRoot.get("description")), "%" + name.toLowerCase() + "%"));
         List<Gif> foundGifs = session.createQuery(criteria).getResultList();
 
         session.close();
