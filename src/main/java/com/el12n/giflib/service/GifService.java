@@ -17,5 +17,7 @@ public interface GifService {
 
     void delete(Gif gif);
 
+    List<Gif> findFavorites();
+
     void toggleFavorite(Gif gif);
 }

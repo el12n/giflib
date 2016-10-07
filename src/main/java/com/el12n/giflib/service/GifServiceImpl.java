@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Alvaro De la Cruz on 10/6/2016.
@@ -41,6 +42,11 @@ public class GifServiceImpl implements GifService {
     @Override
     public void delete(Gif gif) {
         gifDao.delete(gif);
+    }
+
+    @Override
+    public List<Gif> findFavorites() {
+        return gifDao.findAll().stream().filter(Gif::isFavorite).collect(Collectors.toList());
     }
 
     @Override

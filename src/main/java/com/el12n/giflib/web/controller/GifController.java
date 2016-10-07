@@ -44,6 +44,13 @@ public class GifController {
         return gifService.findById(gifId).getBytes();
     }
 
+    @RequestMapping("/favorites")
+    public String favoriteGifList(Model model) {
+        model.addAttribute("gifs", gifService.findFavorites());
+        return "gif/favorites";
+    }
+
+
     @RequestMapping("/upload")
     public String formNewGif(Model model) {
         if (!model.containsAttribute("gif")) {
