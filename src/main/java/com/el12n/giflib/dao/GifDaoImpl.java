@@ -34,14 +34,14 @@ public class GifDaoImpl implements GifDao {
     }
 
     @Override
-    public List<Gif> findByName(String name) {
+    public List<Gif> findByDescription(String description) {
         Session session = sessionFactory.openSession();
 
         CriteriaBuilder builder = sessionFactory.getCriteriaBuilder();
         CriteriaQuery<Gif> criteria = builder.createQuery(Gif.class);
         Root<Gif> gifRoot = criteria.from(Gif.class);
         criteria.select(gifRoot);
-        criteria.where(builder.like(builder.lower(gifRoot.get("description")), "%" + name.toLowerCase() + "%"));
+        criteria.where(builder.like(builder.lower(gifRoot.get("description")), "%" + description.toLowerCase() + "%"));
         List<Gif> foundGifs = session.createQuery(criteria).getResultList();
 
         session.close();

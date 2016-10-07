@@ -55,7 +55,7 @@ public class GifController {
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public String searchGif(@RequestParam String q, RedirectAttributes redirectAttributes) {
-        redirectAttributes.addFlashAttribute("gifs", gifService.findByName(q));
+        redirectAttributes.addFlashAttribute("gifs", gifService.findByDescription(q));
         redirectAttributes.addFlashAttribute("query", q);
         return "redirect:/";
     }

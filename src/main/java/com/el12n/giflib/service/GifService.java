@@ -11,7 +11,7 @@ import java.util.List;
 public interface GifService {
     List<Gif> findAll();
 
-    List<Gif> findByName(String name);
+    List<Gif> findByDescription(String description);
 
     Gif findById(Long id);
 

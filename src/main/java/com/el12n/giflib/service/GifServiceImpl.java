@@ -25,8 +25,8 @@ public class GifServiceImpl implements GifService {
     }
 
     @Override
-    public List<Gif> findByName(String name) {
-        return gifDao.findByName(name);
+    public List<Gif> findByDescription(String description) {
+        return gifDao.findByDescription(description);
     }
 
     @Override
