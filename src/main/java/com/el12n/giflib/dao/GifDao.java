@@ -10,6 +10,8 @@ import java.util.List;
 public interface GifDao {
     List<Gif> findAll();
 
+    List<Gif> findByName(String name);
+
     Gif findById(long id);
 
     void save(Gif gif);

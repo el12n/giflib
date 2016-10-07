@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 /**
@@ -30,6 +31,22 @@ public class GifDaoImpl implements GifDao {
 
         session.close();
         return gifs;
+    }
+
+    @Override
+    public List<Gif> findByName(String name) {
+        Session session = sessionFactory.openSession();
+
+        CriteriaBuilder builder = sessionFactory.getCriteriaBuilder();
+        CriteriaQuery<Gif> criteria = builder.createQuery(Gif.class);
+        Root<Gif> gifRoot = criteria.from(Gif.class);
+        criteria.select(gifRoot);
+        criteria.where(builder.like(gifRoot.get("description"), "%" + name + "%"));
+        List<Gif> foundGifs = session.createQuery(criteria).getResultList();
+
+        session.close();
+
+        return foundGifs;
     }
 
     @Override

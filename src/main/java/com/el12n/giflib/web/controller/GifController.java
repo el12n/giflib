@@ -50,6 +50,11 @@ public class GifController {
         return "gif/favorites";
     }
 
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    public String searchGif(@RequestParam String q, Model model) {
+        model.addAttribute("gifs", gifService.findByName(q));
+        return "gif/index";
+    }
 
     @RequestMapping("/upload")
     public String formNewGif(Model model) {
