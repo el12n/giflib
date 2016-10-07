@@ -37,17 +37,6 @@ public class CategoryController {
         return "category/index";
     }
 
-//    @RequestMapping("/category/{id}")
-//    public String category(@PathVariable int id, ModelMap modelMap) {
-//        Category category = new Category();
-//        modelMap.put("category", category);
-//
-//        List<Gif> gifs = new ArrayList<>();
-//        modelMap.put("gifs", gifs);
-//
-//        return "category/details";
-//    }
-
     @RequestMapping("/categories/{categoryId}")
     public String gifPerCategory(@PathVariable Long categoryId, Model model) {
         Category category = categoryService.findById(categoryId);
